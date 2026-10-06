@@ -1,0 +1,2 @@
+document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-confirm]').forEach(b=>b.addEventListener('click',e=>{if(!confirm(b.dataset.confirm))e.preventDefault()}));});
+function markAll(v){document.querySelectorAll('input[name^="status["]').forEach(x=>x.checked=(x.value===v));}

@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS student_attendance CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE student_attendance;
+CREATE TABLE admins(id INT AUTO_INCREMENT PRIMARY KEY,username VARCHAR(50) UNIQUE NOT NULL,password VARCHAR(255) NOT NULL,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+INSERT INTO admins(username,password) VALUES('admin','$2y$12$0l4JaPf265KWGRmfo0NcV.z7mrf9ATm60EmnmafWmUg8psG8FDsPm');
+CREATE TABLE departments(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(150) UNIQUE NOT NULL,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+INSERT INTO departments(name) VALUES('Computer Science & Technology'),('Electrical Technology'),('Civil Technology');
+CREATE TABLE students(id INT AUTO_INCREMENT PRIMARY KEY,roll VARCHAR(50) UNIQUE NOT NULL,name VARCHAR(150) NOT NULL,father_name VARCHAR(150),phone VARCHAR(30),email VARCHAR(120),department_id INT,semester TINYINT NOT NULL DEFAULT 1,session VARCHAR(30),gender VARCHAR(20),dob DATE,address TEXT,profile_photo VARCHAR(255),created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(department_id) REFERENCES departments(id) ON DELETE SET NULL);
+CREATE TABLE teachers(id INT AUTO_INCREMENT PRIMARY KEY,teacher_id VARCHAR(50) UNIQUE NOT NULL,name VARCHAR(150) NOT NULL,email VARCHAR(120),phone VARCHAR(30),department_id INT,designation VARCHAR(100),created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(department_id) REFERENCES departments(id) ON DELETE SET NULL);
+CREATE TABLE attendance(id INT AUTO_INCREMENT PRIMARY KEY,student_id INT NOT NULL,attendance_date DATE NOT NULL,status ENUM('Present','Absent') NOT NULL,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,UNIQUE KEY unique_attendance(student_id,attendance_date),FOREIGN KEY(student_id) REFERENCES students(id) ON DELETE CASCADE);
+INSERT INTO students(roll,name,father_name,department_id,semester,session,gender) VALUES('1001','Demo Student','Demo Father',1,5,'2025-26','Male');

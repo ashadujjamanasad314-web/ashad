@@ -1,0 +1,1 @@
+<?php require "../includes/auth.php";require "../config/database.php";$pdo->prepare("DELETE FROM teachers WHERE id=?")->execute([(int)$_GET['id']]);header("Location:index.php");exit;?>

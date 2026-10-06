@@ -1,0 +1,1 @@
+<?php require "../includes/auth.php";require "../config/database.php";$id=(int)($_GET['id']??0);$pdo->prepare("DELETE FROM students WHERE id=?")->execute([$id]);$_SESSION['flash']=['type'=>'success','msg'=>'Student deleted.'];header("Location:index.php");exit;?>
